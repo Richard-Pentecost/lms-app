@@ -8,7 +8,6 @@ const LoginScreen = () => {
     </View>
   );
 };
-
 export default LoginScreen;
 
 const styles = StyleSheet.create({

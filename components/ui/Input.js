@@ -1,6 +1,13 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-const Input = ({ children, keyboardType, onUpdateValue, value, isInvalid }) => {
+const Input = ({
+  children,
+  keyboardType,
+  onUpdateValue,
+  value,
+  secure,
+  isInvalid,
+}) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={[styles.label, isInvalid && styles.labelInvalid]}>
@@ -11,6 +18,7 @@ const Input = ({ children, keyboardType, onUpdateValue, value, isInvalid }) => {
         keyboardType={keyboardType}
         onChangeText={onUpdateValue}
         value={value}
+        secureTextEntry={secure}
       />
     </View>
   );

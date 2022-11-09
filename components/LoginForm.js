@@ -1,16 +1,48 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Input from './ui/Input';
 import PrimaryButton from './ui/PrimaryButton';
 
 const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const updateInputHandler = (inputType, enteredValue) => {
+    switch (inputType) {
+      case 'email':
+        setEmail(enteredValue);
+        break;
+      case 'password':
+        setPassword(enteredValue);
+        break;
+    }
+  };
+
+  const onPress = () => {
+    console.log('email:', email);
+    console.log('password:', password);
+  };
+
   return (
     <View style={styles.form}>
       <View>
-        <Input>Email</Input>
-        <Input>Password</Input>
+        <Input
+          onUpdateValue={updateInputHandler.bind(this, 'email')}
+          value={email}
+          keyboardType="email-address"
+        >
+          Email
+        </Input>
+        <Input
+          onUpdateValue={updateInputHandler.bind(this, 'password')}
+          value={password}
+          secure
+        >
+          Password
+        </Input>
       </View>
       <View style={styles.buttonContainer}>
-        <PrimaryButton>Login</PrimaryButton>
+        <PrimaryButton onPress={onPress}>Login</PrimaryButton>
       </View>
     </View>
   );
