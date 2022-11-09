@@ -1,0 +1,16 @@
+export const Colours = {
+  grey10: '#fafbfc',
+  grey20: '#f5f5f5',
+  grey30: '#d7dbdb',
+  grey100: '#464c4f',
+  grey110: '#3f4a51',
+  red10: '#f26c4f',
+  red50: '#cb2431',
+  green10: '#16aa56',
+  green20: '#2ea44f',
+  green50: '#009800',
+  green100: '#002a31',
+  error10: '#fff0f0',
+  error20: '#ffdbdb',
+  error50: '#ff1e25',
+};
