@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../store/actions/authActions';
 import Input from './ui/Input';
 import PrimaryButton from './ui/PrimaryButton';
 
-const LoginForm = () => {
+const LoginForm = ({ loginUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
 
   const updateInputHandler = (inputType, enteredValue) => {
     switch (inputType) {
@@ -22,7 +19,7 @@ const LoginForm = () => {
   };
 
   const onPress = () => {
-    dispatch(loginUser({ email, password }));
+    loginUser({ email, password });
   };
 
   return (
