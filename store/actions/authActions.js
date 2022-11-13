@@ -12,12 +12,9 @@ export const loginUser = (credentials) => {
       dispatch(authActions.loginStart());
       const response = await axios.post(`${API_URL}/login`, credentials);
       setToken(response.data.token);
-      console.log('****');
       const token = await getTokenPayload();
-      console.log('token:', token);
       dispatch(authActions.loginSuccess({ token, user: response.data.user }));
     } catch (error) {
-      console.log('*** error ***');
       console.error(error);
       dispatch(authActions.loginFail('Error'));
     }

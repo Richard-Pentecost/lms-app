@@ -13,10 +13,10 @@ export const getTokenPayload = async () => {
   return token && decode(token);
 };
 
-// export const isTokenValid = () => {
-//   const token = getTokenPayload();
-//   return Boolean(token && ((!token.exp) || (dayjs().unix() < token.exp)));
-// };
+export const isTokenValid = () => {
+  const token = getTokenPayload();
+  return Boolean(token && (!token.exp || dayjs().unix() < token.exp));
+};
 
 // export const removeToken = () => {
 //   window.localStorage.removeItem('apiToken');
