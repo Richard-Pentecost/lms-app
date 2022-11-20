@@ -25,6 +25,9 @@ const authSlice = createSlice({
       state.loading = false;
       state.errorMessage = action.payload;
     },
+    authenticate(state, action) {
+      state.token = action.payload.token;
+    },
   },
 });
 

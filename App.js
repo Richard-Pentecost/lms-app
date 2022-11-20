@@ -3,12 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import store from './store';
 import { authActions } from './store/slices/authSlice';
 import { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { isTokenValid } from './utils/token-manager';
+import { getToken, isTokenValid } from './utils/token-manager';
+import { authenticate } from './store/actions/authActions';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,24 +43,21 @@ const Navigation = () => {
 };
 
 const Root = () => {
-  //   const [isTryingLogin, setIsTryingLogin] = useState(true);
-  //   const { token } = useSelector((state) => state.authState);
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
+  const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     console.log('**** useEffect ****');
-  //     const fetchToken = async () => {
-  //       console.log(token);
-  //       Boolean(token) && isTokenValid(token);
-  //       console.log(isTokenValid(token));
-  //       setIsTryingLogin(false);
-  //     };
+  useEffect(() => {
+    const fetchToken = async () => {
+      dispatch(authenticate());
+      setIsTryingLogin(false);
+    };
 
-  //     fetchToken();
-  //   }, []);
+    fetchToken();
+  }, []);
 
-  //   if (isTryingLogin) {
-  //     return <AppLoading />;
-  //   }
+  if (isTryingLogin) {
+    return <AppLoading />;
+  }
 
   return <Navigation />;
 };

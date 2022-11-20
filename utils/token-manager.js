@@ -13,8 +13,7 @@ export const getTokenPayload = async () => {
   return token && decode(token);
 };
 
-export const isTokenValid = () => {
-  const token = getTokenPayload();
+export const isTokenValid = (token) => {
   return Boolean(token && (!token.exp || dayjs().unix() < token.exp));
 };
 
