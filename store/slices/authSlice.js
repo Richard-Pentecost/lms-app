@@ -28,6 +28,10 @@ const authSlice = createSlice({
     authenticate(state, action) {
       state.token = action.payload.token;
     },
+    logoutUser(state) {
+      state.token = null;
+      state.loggedInUser = null;
+    },
   },
 });
 

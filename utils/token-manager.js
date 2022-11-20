@@ -17,6 +17,6 @@ export const isTokenValid = (token) => {
   return Boolean(token && (!token.exp || dayjs().unix() < token.exp));
 };
 
-// export const removeToken = () => {
-//   window.localStorage.removeItem('apiToken');
-// };
+export const removeToken = () => {
+  AsyncStorage.removeItem('token');
+};

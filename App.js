@@ -8,8 +8,9 @@ import store from './store';
 import { authActions } from './store/slices/authSlice';
 import { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { getToken, isTokenValid } from './utils/token-manager';
-import { authenticate } from './store/actions/authActions';
+import { authenticate, logoutUser } from './store/actions/authActions';
+import IconButton from './components/ui/IconButton';
+import { Colours } from './constants/colours';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,8 +27,25 @@ const LoginStack = () => {
 };
 
 const AuthenticatedStack = () => {
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  };
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerRight: () => (
+          <IconButton
+            icon={'sign-out'}
+            color={Colours.green100}
+            size={24}
+            onPress={logoutHandler}
+          />
+        ),
+      }}
+    >
       <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );

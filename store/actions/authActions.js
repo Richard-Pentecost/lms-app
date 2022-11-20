@@ -3,6 +3,7 @@ import { API_URL } from 'react-native-dotenv';
 import {
   getTokenPayload,
   isTokenValid,
+  removeToken,
   setToken,
 } from '../../utils/token-manager';
 import { authActions } from '../slices/authSlice';
@@ -35,5 +36,12 @@ export const authenticate = () => {
     if (token && isTokenValid(token)) {
       dispatch(authActions.authenticate({ token }));
     }
+  };
+};
+
+export const logoutUser = () => {
+  return async (dispatch) => {
+    removeToken();
+    dispatch(authActions.logoutUser());
   };
 };
