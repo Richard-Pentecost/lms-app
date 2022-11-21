@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
+import { FontAwesome } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import store from './store';
 import { authenticate, logoutUser } from './store/actions/authActions';
@@ -10,9 +12,11 @@ import { Colours } from './constants/colours';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import FarmScreen from './screens/FarmScreen';
+import DataScreen from './screens/DataScreen';
 import IconButton from './components/ui/IconButton';
 
 const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
 
 const LoginStack = () => {
   return (
@@ -48,8 +52,36 @@ const AuthenticatedStack = () => {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Farm" component={FarmScreen} />
+      <Stack.Screen name="Farm" component={FarmTabNavigation} />
     </Stack.Navigator>
+  );
+};
+
+const FarmTabNavigation = ({ route }) => {
+  const { farm } = route.params;
+  return (
+    <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+      <BottomTab.Screen
+        name="Information"
+        component={FarmScreen}
+        initialParams={{ farm }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Data"
+        component={DataScreen}
+        initialParams={{ farm }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="caret-down" color={color} size={size} />
+          ),
+        }}
+      />
+    </BottomTab.Navigator>
   );
 };
 

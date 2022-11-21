@@ -2,6 +2,7 @@ import { Text, View } from 'react-native';
 
 const FarmScreen = ({ route, navigation }) => {
   const { farm } = route.params;
+  console.log('Farm Screen ******');
   console.log(farm);
   return (
     <View>

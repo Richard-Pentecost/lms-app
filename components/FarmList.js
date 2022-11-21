@@ -7,6 +7,7 @@ const FarmList = ({ farms }) => {
 
   const renderFarmCard = ({ item }) => {
     onPressHandler = () => {
+      console.log(item);
       navigation.navigate('Farm', { farm: item });
     };
 
