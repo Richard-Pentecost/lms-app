@@ -1,25 +1,28 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
 import { Colours } from '../../constants/colours';
 import FarmCardDetail from './FarmCardDetail';
 
-const FarmCard = ({ farmName, postcode, contactName, contactNumber }) => {
-  return (
-    <Pressable
-      onPress={() => {}}
-      style={({ pressed }) => [styles.farmCard, pressed && styles.pressed]}
-    >
-      <View style={styles.headingContainer}>
-        <Text style={styles.farmNameText}>{farmName}</Text>
-      </View>
-      <View style={styles.detailsContainer}>
-        <FarmCardDetail icon={'address-card-o'}>{postcode}</FarmCardDetail>
-        <FarmCardDetail icon={'user'}>{contactName}</FarmCardDetail>
-        <FarmCardDetail icon={'phone-square'}>{contactNumber}</FarmCardDetail>
-      </View>
-    </Pressable>
-  );
-};
+const FarmCard = ({
+  farmName,
+  postcode,
+  contactName,
+  contactNumber,
+  onPress,
+}) => (
+  <Pressable
+    onPress={onPress}
+    style={({ pressed }) => [styles.farmCard, pressed && styles.pressed]}
+  >
+    <View style={styles.headingContainer}>
+      <Text style={styles.farmNameText}>{farmName}</Text>
+    </View>
+    <View style={styles.detailsContainer}>
+      <FarmCardDetail icon={'address-card-o'}>{postcode}</FarmCardDetail>
+      <FarmCardDetail icon={'user'}>{contactName}</FarmCardDetail>
+      <FarmCardDetail icon={'phone-square'}>{contactNumber}</FarmCardDetail>
+    </View>
+  </Pressable>
+);
 
 export default FarmCard;
 

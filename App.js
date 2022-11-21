@@ -1,16 +1,16 @@
+import { useEffect, useState } from 'react';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
+import AppLoading from 'expo-app-loading';
+import store from './store';
+import { authenticate, logoutUser } from './store/actions/authActions';
+import { Colours } from './constants/colours';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import store from './store';
-import { authActions } from './store/slices/authSlice';
-import { useEffect, useState } from 'react';
-import AppLoading from 'expo-app-loading';
-import { authenticate, logoutUser } from './store/actions/authActions';
+import FarmScreen from './screens/FarmScreen';
 import IconButton from './components/ui/IconButton';
-import { Colours } from './constants/colours';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +36,7 @@ const AuthenticatedStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerBackTitleVisible: false,
         headerRight: () => (
           <IconButton
             icon={'sign-out'}
@@ -47,6 +48,7 @@ const AuthenticatedStack = () => {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Farm" component={FarmScreen} />
     </Stack.Navigator>
   );
 };
