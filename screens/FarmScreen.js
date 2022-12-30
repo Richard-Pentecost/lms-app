@@ -1,14 +1,9 @@
-import { Text, View } from 'react-native';
+import FarmInformation from '../components/Farm/FarmInformation';
 
 const FarmScreen = ({ route, navigation }) => {
   const { farm } = route.params;
-  console.log('Farm Screen ******');
-  console.log(farm);
-  return (
-    <View>
-      <Text>FarmScreen</Text>
-    </View>
-  );
+
+  return <FarmInformation farm={farm} />;
 };
 
 export default FarmScreen;

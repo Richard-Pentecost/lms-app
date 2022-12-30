@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList } from 'react-native';
+import { Div } from 'react-native-magnus';
 import FarmCard from './Farm/FarmCard';
 
 const FarmList = ({ farms }) => {
@@ -7,7 +8,6 @@ const FarmList = ({ farms }) => {
 
   const renderFarmCard = ({ item }) => {
     onPressHandler = () => {
-      console.log(item);
       navigation.navigate('Farm', { farm: item });
     };
 
@@ -21,21 +21,16 @@ const FarmList = ({ farms }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Div>
       <FlatList
+        columnWrapperStyle={{ justifyContent: 'space-between' }}
+        numColumns={2}
         data={farms}
         keyExtractor={(item) => item.uuid}
         renderItem={renderFarmCard}
       />
-    </View>
+    </Div>
   );
 };
 
 export default FarmList;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-});

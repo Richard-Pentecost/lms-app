@@ -1,30 +1,21 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-const Input = ({
-  children,
-  keyboardType,
-  onUpdateValue,
-  value,
-  secure,
-  isInvalid,
-}) => {
+const TextArea = ({ children, onUpdateValue, value, noOfLines }) => {
   return (
     <View style={styles.inputContainer}>
-      <Text style={[styles.label, isInvalid && styles.labelInvalid]}>
-        {children}:
-      </Text>
+      <Text style={styles.label}>{children}:</Text>
       <TextInput
-        style={[styles.input, isInvalid && styles.inputInvalid]}
-        keyboardType={keyboardType}
+        style={[styles.input, noOfLines && styles.textArea]}
         onChangeText={onUpdateValue}
         value={value}
-        secureTextEntry={secure}
+        multiline={!!noOfLines}
+        numberOfLines={noOfLines}
       />
     </View>
   );
 };
 
-export default Input;
+export default TextArea;
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -35,17 +26,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     fontWeight: 'bold',
   },
-  labelInvalid: {
-    color: 'red',
-  },
   input: {
     paddingVertical: 8,
     paddingHorizontal: 6,
-    backgroundColor: '#ccc',
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderWidth: 1,
     borderRadius: 4,
     fontSize: 16,
   },
-  inputInvalid: {
-    backgroundColor: 'red',
+  textArea: {
+    height: 60,
   },
 });

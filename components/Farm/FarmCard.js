@@ -1,5 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Colours } from '../../constants/colours';
+import { Button, Div, Text } from 'react-native-magnus';
 import FarmCardDetail from './FarmCardDetail';
 
 const FarmCard = ({
@@ -9,48 +8,29 @@ const FarmCard = ({
   contactNumber,
   onPress,
 }) => (
-  <Pressable
-    onPress={onPress}
-    style={({ pressed }) => [styles.farmCard, pressed && styles.pressed]}
+  <Div
+    shadow="sm"
+    w="48%"
+    borderColor="green500"
+    borderWidth={1}
+    mb={10}
+    rounded="lg"
   >
-    <View style={styles.headingContainer}>
-      <Text style={styles.farmNameText}>{farmName}</Text>
-    </View>
-    <View style={styles.detailsContainer}>
-      <FarmCardDetail icon={'address-card-o'}>{postcode}</FarmCardDetail>
-      <FarmCardDetail icon={'user'}>{contactName}</FarmCardDetail>
-      <FarmCardDetail icon={'phone-square'}>{contactNumber}</FarmCardDetail>
-    </View>
-  </Pressable>
+    <Button block h={120} p="none" bg="white" rounded="lg" onPress={onPress}>
+      <Div flex={1} p={10}>
+        <Div pb={5} borderBottomColor="gray500" borderBottomWidth={1}>
+          <Text fontWeight="bold" fontSize="xl">
+            {farmName}
+          </Text>
+        </Div>
+        <Div pt={10}>
+          <FarmCardDetail icon={'address-card-o'}>{postcode}</FarmCardDetail>
+          <FarmCardDetail icon={'user'}>{contactName}</FarmCardDetail>
+          <FarmCardDetail icon={'phone-square'}>{contactNumber}</FarmCardDetail>
+        </Div>
+      </Div>
+    </Button>
+  </Div>
 );
 
 export default FarmCard;
-
-const styles = StyleSheet.create({
-  farmCard: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    marginVertical: 4,
-    backgroundColor: 'white',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: Colours.grey30,
-  },
-  pressed: {
-    opacity: 0.7,
-  },
-  headingContainer: {
-    borderBottomWidth: 1,
-    paddingBottom: 4,
-    borderBottomColor: Colours.grey30,
-  },
-  farmNameText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: Colours.grey100,
-  },
-  detailsContainer: {
-    flexDirection: 'row',
-    paddingVertical: 4,
-  },
-});

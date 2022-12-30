@@ -14,6 +14,8 @@ import HomeScreen from './screens/HomeScreen';
 import FarmScreen from './screens/FarmScreen';
 import DataScreen from './screens/DataScreen';
 import IconButton from './components/ui/IconButton';
+import AddDataScreen from './screens/AddDataScreen';
+import DateExampleScreen from './screens/DateExampleScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -57,8 +59,13 @@ const AuthenticatedStack = () => {
   );
 };
 
-const FarmTabNavigation = ({ route }) => {
+const FarmTabNavigation = ({ route, navigation }) => {
   const { farm } = route.params;
+
+  useEffect(() => {
+    navigation.setOptions({ title: farm.farmName });
+  }, [farm]);
+
   return (
     <BottomTab.Navigator screenOptions={{ headerShown: false }}>
       <BottomTab.Screen
@@ -67,7 +74,7 @@ const FarmTabNavigation = ({ route }) => {
         initialParams={{ farm }}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" color={color} size={size} />
+            <FontAwesome name="info" color={color} size={size} />
           ),
         }}
       />
@@ -77,7 +84,26 @@ const FarmTabNavigation = ({ route }) => {
         initialParams={{ farm }}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="caret-down" color={color} size={size} />
+            <FontAwesome name="table" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Example"
+        component={DateExampleScreen}
+        initialParams={{ farm }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="table" color={color} size={size} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Add Data"
+        component={AddDataScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="plus" color={color} size={size} />
           ),
         }}
       />

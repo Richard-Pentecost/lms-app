@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import farmReducer from './slices/farmSlice';
+import dataReducer from './slices/dataSlice';
 
 const combinedReducer = combineReducers({
   authState: authReducer,
   farmState: farmReducer,
+  dataState: dataReducer,
 });
 
 const rootReducer = (state, action) => {
