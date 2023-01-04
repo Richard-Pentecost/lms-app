@@ -34,7 +34,9 @@ const LoginForm = ({ loginUser }) => {
         value={formik.values.email}
         onChangeText={formik.handleChange('email')}
         onBlur={formik.handleBlur('email')}
-        borderColor={formik.errors.password ? 'red500' : 'gray400'}
+        borderColor={
+          formik.touched.email && formik.errors.email ? 'red500' : 'gray400'
+        }
       />
       <Div h={5}>
         <Div position="absolute" top={0} zIndex={1}>
@@ -54,7 +56,11 @@ const LoginForm = ({ loginUser }) => {
         value={formik.values.password}
         onChangeText={formik.handleChange('password')}
         onBlur={formik.handleBlur('password')}
-        borderColor={formik.errors.password ? 'red500' : 'gray400'}
+        borderColor={
+          formik.touched.password && formik.errors.password
+            ? 'red500'
+            : 'gray400'
+        }
       />
       <Div h={5}>
         <Div position="absolute" top={0} zIndex={1}>

@@ -1,20 +1,14 @@
-import { StyleSheet, View } from 'react-native';
-import DataForm from '../components/Farm/DataForm';
+import { Div } from 'react-native-magnus';
+import DataForm from '../components/FarmData/DataForm';
 import Header from '../components/ui/Header';
 
 const AddDataScreen = () => {
   return (
-    <View style={styles.container}>
+    <Div py={25}>
       <Header>Add Data</Header>
       <DataForm />
-    </View>
+    </Div>
   );
 };
 
 export default AddDataScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

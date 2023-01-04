@@ -1,21 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Div, Text } from 'react-native-magnus';
 
 const Header = ({ children }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{children}</Text>
-    </View>
+    <Div px={25}>
+      <Text color="gray900" fontWeight="bold" fontSize="4xl">
+        {children}
+      </Text>
+    </Div>
   );
 };
 
 export default Header;
-
-const styles = StyleSheet.create({
-  container: {
-    paddingBottom: 10,
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-});
