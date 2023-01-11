@@ -16,6 +16,7 @@ import DataScreen from './screens/DataScreen';
 import IconButton from './components/ui/IconButton';
 import AddDataScreen from './screens/AddDataScreen';
 import DateExampleScreen from './screens/DateExampleScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -142,11 +143,11 @@ const Root = () => {
 
 export default function App() {
   return (
-    <>
+    <SafeAreaProvider>
       <StatusBar style="auto" />
       <Provider store={store}>
         <Root />
       </Provider>
-    </>
+    </SafeAreaProvider>
   );
 }

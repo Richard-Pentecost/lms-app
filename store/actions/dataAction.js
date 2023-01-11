@@ -19,22 +19,39 @@ export const fetchData = (farmId) => {
   };
 };
 
-export const addData = (data, previousDataUuid) => {
-  return async (dispatch) => {
+// export const addData = (data, previousDataUuid) => {
+//   return async (dispatch) => {
+//     try {
+//       const { farmFk: farmId } = data;
+//       dispatch(dataActions.addDataStart());
+//       const headers = { Authorization: getToken() };
+//       await axios.post(
+//         `${API_URL}/farms/${farmId}/data`,
+//         { data, previousDataUuid },
+//         { headers }
+//       );
+//       dispatch(dataActions.addDataSuccess());
+//       dispatch(fetchData(farmId));
+//     } catch (error) {
+//       console.error(error);
+//       dispatch(dataActions.addDataFail('Error adding data'));
+//     }
+//   };
+// };
+
+export const addData = createAsyncThunk(
+  'data/addData',
+  async (data, previousDataUuid) => {
     try {
       const { farmFk: farmId } = data;
-      dispatch(dataActions.addDataStart());
-      const headers = { Authorization: getToken() };
-      await axios.post(
-        `${API_URL}/farms/${farmId}/data`,
+      const headers = { Authorization: await getToken() };
+      await axios.post(`${API_URL}/farms/${farmId}/data`),
         { data, previousDataUuid },
-        { headers }
-      );
-      dispatch(dataActions.addDataSuccess());
-      dispatch(fetchData(farmId));
+        { headers };
+      return;
     } catch (error) {
       console.error(error);
-      dispatch(dataActions.addDataFail('Error adding data'));
+      return 'There was an error adding data';
     }
-  };
-};
+  }
+);

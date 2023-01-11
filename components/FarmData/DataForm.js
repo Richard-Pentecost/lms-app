@@ -1,14 +1,21 @@
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import { Button, Div } from 'react-native-magnus';
 import { dataValidator } from '../../utils/formValidators';
+import DatePicker from '../Farm/DatePicker';
 import InputField from '../Farm/InputField';
 import Select from '../ui/Select';
 
 const DataForm = ({ products }) => {
   const formik = useFormik({
     initialValues: {
+      date: new Date(),
       product: '',
       noOfCows: '',
       quantity: '',
@@ -28,8 +35,9 @@ const DataForm = ({ products }) => {
 
   const productNames = products.map((product) => product.productName);
   useEffect(() => {
-    console.log(formik.values.product);
-    console.log(formik.touched.noOfCows);
+    // console.log(formik.values.product);
+    // console.log(formik.touched.noOfCows);
+    console.log(formik.values.date);
     // console.log(formik.touched.quantity);
     // console.log(formik.touched.meterReading);
     // console.log(formik.touched.waterUsage);
@@ -40,12 +48,18 @@ const DataForm = ({ products }) => {
   }, [formik.values]);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={100}
-    >
-      <ScrollView>
+    <ScrollView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={10}
+      >
         <Div px={25}>
+          <DatePicker
+            date={formik.values.date}
+            touched={formik.touched.date}
+            errors={formik.errors.date}
+            formik={formik}
+          />
           <Select
             label="Product"
             field="product"
@@ -138,16 +152,22 @@ const DataForm = ({ products }) => {
           <Button
             block
             py="lg"
-            mt="xl"
+            my="xl"
             bg="green700"
             onPress={formik.handleSubmit}
           >
             Add data
           </Button>
         </Div>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
 export default DataForm;
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+  },
+});

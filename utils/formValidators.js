@@ -9,6 +9,7 @@ export const loginValidator = Yup.object().shape({
 });
 
 export const dataValidator = Yup.object().shape({
+  date: Yup.date().max(new Date(), 'The cannot be in the future'),
   product: Yup.string().required('A product is required'),
   noOfCows: Yup.number()
     .required('Number of cows is required')
