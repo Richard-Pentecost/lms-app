@@ -21,7 +21,8 @@ const farmSlice = createSlice({
       state.loading = false;
     },
     fetchFarmsFail(state, action) {
-      (state.loading = false), (state.errorMessage = action.payload);
+      state.loading = false;
+      state.errorMessage = action.payload;
     },
   },
 });

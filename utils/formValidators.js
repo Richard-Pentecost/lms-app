@@ -9,6 +9,7 @@ export const loginValidator = Yup.object().shape({
 });
 
 export const dataValidator = Yup.object().shape({
+  product: Yup.string().required('A product is required'),
   noOfCows: Yup.number()
     .required('Number of cows is required')
     .min(1, 'Number of cows must be greater than 0'),

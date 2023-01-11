@@ -1,22 +1,84 @@
-import { StyleSheet, Text, View } from 'react-native';
-
 import { useState } from 'react';
+import SelectDropdown from 'react-native-select-dropdown';
+import { StyleSheet } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Div, Text } from 'react-native-magnus';
 
-const data = [
-  { label: 'Java', value: 'java' },
-  { label: 'JavaScript', value: 'js' },
-];
-const Select = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('java');
-  const [valueSS, setValueSS] = useState('');
-
-  const onChangeSS = (value) => {
-    setValueSS(value);
+const Select = ({ label, field, products, errors, touched, formik }) => {
+  const dropdownBoxStyling = () => {
+    return errors && touched
+      ? { ...styles.dropdownBoxBtnStyle, borderColor: '#f56565' }
+      : styles.dropdownBoxBtnStyle;
   };
 
-  return <Text>Hello</Text>;
+  return (
+    <>
+      <Text fontSize="md" mt="lg">
+        {label}
+      </Text>
+      <SelectDropdown
+        data={products}
+        onSelect={formik.handleChange(field)}
+        onBlur={() => formik.handleBlur(field)}
+        defaultButtonText={'Select product'}
+        buttonTextAfterSelection={(selectedItem) => selectedItem}
+        rowTextForSelection={(item) => item}
+        buttonStyle={dropdownBoxStyling()}
+        buttonTextStyle={styles.dropdownBoxBtnTxtStyle}
+        renderDropdownIcon={(isOpened) => {
+          return (
+            <FontAwesome
+              name={isOpened ? 'chevron-up' : 'chevron-down'}
+              color={'#cbd5e0'}
+              size={14}
+            />
+          );
+        }}
+        dropdownIconPosition={'right'}
+        dropdownStyle={styles.dropdownBoxDropdownStyle}
+        rowStyle={styles.dropdownBoxRowStyle}
+        rowTextStyle={styles.dropdownBoxRowTxtStyle}
+      />
+      {touched && errors && (
+        <Div>
+          <Text color="red500" fontSize="md" mt="sm">
+            {touched && errors}
+          </Text>
+        </Div>
+      )}
+    </>
+  );
 };
 
 export default Select;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  dropdownBoxBtnStyle: {
+    width: '100%',
+    height: 40,
+    backgroundColor: '#FFF',
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#cbd5e0',
+    marginTop: 6,
+  },
+  dropdownBoxBtnTxtStyle: {
+    marginLeft: 5,
+    color: '#1a202c',
+    textAlign: 'left',
+    fontSize: 11,
+  },
+  dropdownBoxDropdownStyle: { backgroundColor: '#EFEFEF', borderRadius: 6 },
+  dropdownBoxRowStyle: {
+    backgroundColor: '#EFEFEF',
+    borderBottomColor: '#cbd5e0',
+  },
+  dropdownBoxRowTxtStyle: {
+    fontSize: 11,
+    color: '#1a202c',
+    textAlign: 'left',
+  },
+  dropdownInvalid: {
+    borderColor: '#f56565',
+  },
+});

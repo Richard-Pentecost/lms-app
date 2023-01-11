@@ -8,9 +8,10 @@ const InputField = ({
   errors,
   touched,
   formik,
+  noOfLines,
 }) => (
   <>
-    <Text fontSize="md" mt="xl">
+    <Text fontSize="md" mt="lg">
       {label}
     </Text>
     <Input
@@ -23,14 +24,18 @@ const InputField = ({
       onChangeText={formik.handleChange(field)}
       onBlur={formik.handleBlur(field)}
       borderColor={touched && errors ? 'red500' : 'gray400'}
+      focusBorderColor="blue400"
+      multiline={!!noOfLines}
+      numberOfLines={noOfLines}
+      textAlignVertical={'top'}
     />
-    <Div>
-      <Div position="absolute" top={0} zIndex={1}>
+    {touched && errors && (
+      <Div>
         <Text color="red500" fontSize="md" mt="sm">
           {touched && errors}
         </Text>
       </Div>
-    </Div>
+    )}
   </>
 );
 
