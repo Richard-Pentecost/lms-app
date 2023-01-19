@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchActiveFarms } from '../actions/farmActions';
 
 const initialState = {
   farms: null,
@@ -11,19 +12,20 @@ const initialState = {
 const farmSlice = createSlice({
   name: 'farm',
   initialState,
-  reducers: {
-    fetchFarmsStart(state) {
-      state.loading = true;
-      state.errorMessage = '';
-    },
-    fetchFarmsSuccess(state, action) {
-      state.farms = action.payload;
-      state.loading = false;
-    },
-    fetchFarmsFail(state, action) {
-      state.loading = false;
-      state.errorMessage = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchActiveFarms.pending, (state) => {
+        state.loading = true;
+        state.errorMessage = '';
+      })
+      .addCase(fetchActiveFarms.fulfilled, (state, action) => {
+        state.farms = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchActiveFarms.rejected, (state, action) => {
+        state.loading = false;
+        state.errorMessage = action.payload;
+      });
   },
 });
 

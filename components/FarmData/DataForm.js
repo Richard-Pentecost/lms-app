@@ -12,7 +12,7 @@ import DatePicker from '../Farm/DatePicker';
 import InputField from '../Farm/InputField';
 import Select from '../ui/Select';
 
-const DataForm = ({ products }) => {
+const DataForm = ({ products, handleSubmit }) => {
   const formik = useFormik({
     initialValues: {
       date: new Date(),
@@ -28,7 +28,7 @@ const DataForm = ({ products }) => {
       comments: '',
     },
     onSubmit: (data) => {
-      console.log(data);
+      handleSubmit(data);
     },
     validationSchema: dataValidator,
   });
@@ -37,7 +37,7 @@ const DataForm = ({ products }) => {
   useEffect(() => {
     // console.log(formik.values.product);
     // console.log(formik.touched.noOfCows);
-    console.log(formik.values.date);
+    // console.log(formik.values.date);
     // console.log(formik.touched.quantity);
     // console.log(formik.touched.meterReading);
     // console.log(formik.touched.waterUsage);

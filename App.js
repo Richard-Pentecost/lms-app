@@ -102,6 +102,7 @@ const FarmTabNavigation = ({ route, navigation }) => {
       <BottomTab.Screen
         name="Add Data"
         component={AddDataScreen}
+        initialParams={{ farm }}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="plus" color={color} size={size} />

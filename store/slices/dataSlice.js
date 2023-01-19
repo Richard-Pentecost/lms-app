@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addData } from '../actions/dataAction';
+import { addData, fetchData } from '../actions/dataActions';
 
 const initialState = {
   data: null,
@@ -11,36 +11,20 @@ const initialState = {
 const dataSlice = createSlice({
   name: 'data',
   initialState,
-  reducers: {
-    // fetchDataStart(state) {
-    //   state.loading = true;
-    //   state.errorMessage = '';
-    // },
-    // fetchDataSuccess(state, action) {
-    //   state.data = action.payload;
-    //   state.loading = false;
-    // },
-    // fetchDataFail(state, action) {
-    //   state.loading = false;
-    //   state.errorMessage = action.payload;
-    // },
-    // addDataStart(state) {
-    //   state.loading = true;
-    //   state.error = '';
-    //   state.addDataSuccess = false;
-    // },
-    // addDataSuccess(state) {
-    //   state.loading = false;
-    //   state.addDataSuccess = true;
-    // },
-    // addDataFail(state, action) {
-    //   state.loading = false;
-    //   state.errorMessage = action.payload;
-    //   state.addDataSuccess = false;
-    // },
-  },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchData.pending, (state) => {
+        state.loading = true;
+        state.error = '';
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        state.loading = false;
+        state.errorMessage = action.payload;
+      })
       .addCase(addData.pending, (state) => {
         state.loading = true;
         state.error = '';
