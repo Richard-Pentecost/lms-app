@@ -15,7 +15,6 @@ import FarmScreen from './screens/FarmScreen';
 import DataScreen from './screens/DataScreen';
 import IconButton from './components/ui/IconButton';
 import AddDataScreen from './screens/AddDataScreen';
-import DateExampleScreen from './screens/DateExampleScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
@@ -74,8 +73,8 @@ const FarmTabNavigation = ({ route, navigation }) => {
         component={FarmScreen}
         initialParams={{ farm }}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="info" color={color} size={size} />
+          tabBarIcon: ({ size }) => (
+            <FontAwesome name="info" color={Colours.green700} size={size} />
           ),
         }}
       />
@@ -84,18 +83,8 @@ const FarmTabNavigation = ({ route, navigation }) => {
         component={DataScreen}
         initialParams={{ farm }}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="table" color={color} size={size} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Example"
-        component={DateExampleScreen}
-        initialParams={{ farm }}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="table" color={color} size={size} />
+          tabBarIcon: ({ size }) => (
+            <FontAwesome name="table" color={Colours.green700} size={size} />
           ),
         }}
       />
@@ -104,8 +93,8 @@ const FarmTabNavigation = ({ route, navigation }) => {
         component={AddDataScreen}
         initialParams={{ farm }}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="plus" color={color} size={size} />
+          tabBarIcon: ({ size }) => (
+            <FontAwesome name="plus" color={Colours.green700} size={size} />
           ),
         }}
       />

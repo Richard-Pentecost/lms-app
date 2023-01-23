@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addData, fetchData } from '../actions/dataActions';
 
 const initialState = {
-  data: null,
+  data: [],
   loading: false,
   errorMessage: '',
   addDataSuccess: false,

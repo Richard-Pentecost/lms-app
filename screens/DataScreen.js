@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { Div, Text } from 'react-native-magnus';
 import { useDispatch, useSelector } from 'react-redux';
+
+import DataTable from '../components/FarmData/DataTable';
+import DataTable1 from '../components/FarmData/DataTable1';
 import { fetchData } from '../store/actions/dataActions';
 
 const DataScreen = ({ route }) => {
@@ -8,14 +11,17 @@ const DataScreen = ({ route }) => {
   const { data } = useSelector((state) => state.dataState);
 
   useEffect(() => {
-    if (!data) {
-      dispatch(fetchData(route.params.farm.uuid));
-    }
-  }, [dispatch, data]);
+    dispatch(fetchData(route.params.farm.uuid));
+  }, []);
 
   return (
-    <Div>
-      <Text>This is the data screen</Text>
+    <Div p={10}>
+      <DataTable1 data={data} />
+      {/* {data.length > 0 ? (
+        <DataTable1 data={data} />
+      ) : (
+        <Text>No data found</Text>
+      )} */}
     </Div>
   );
 };

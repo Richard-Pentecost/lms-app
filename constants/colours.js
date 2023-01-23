@@ -10,6 +10,7 @@ export const Colours = {
   green20: '#2ea44f',
   green50: '#009800',
   green100: '#002a31',
+  green700: '#2f855a',
   error10: '#fff0f0',
   error20: '#ffdbdb',
   error50: '#ff1e25',

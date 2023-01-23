@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const formatData = (data, uuid) => {
   const {
     date,
@@ -13,6 +15,8 @@ export const formatData = (data, uuid) => {
     comments,
   } = data;
 
+  console.log(dayjs().endOf('day'));
+  console.log(dayjs(date).endOf('day'));
   return {
     date,
     farmFk: uuid,
@@ -22,7 +26,7 @@ export const formatData = (data, uuid) => {
     meterReading: +meterReading,
     waterUsage: +waterUsage,
     pumpDial: +pumpDial,
-    floatBeforeDelivery: +floatAfterDelivery,
+    floatBeforeDelivery: +floatBeforeDelivery,
     targetFeedRate: +targetFeedRate,
     floatAfterDelivery: +floatAfterDelivery,
     comments,
