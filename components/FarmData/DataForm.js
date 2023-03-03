@@ -10,6 +10,7 @@ import { Button, Div } from 'react-native-magnus';
 import { dataValidator } from '../../utils/formValidators';
 import DatePicker from '../Farm/DatePicker';
 import InputField from '../Farm/InputField';
+import InputField1 from '../Farm/InputField1';
 import Select from '../ui/Select';
 
 const DataForm = ({ products, handleSubmit }) => {
@@ -171,3 +172,128 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+// return (
+//   <ScrollView style={styles.container}>
+//     <KeyboardAvoidingView
+//       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+//       keyboardVerticalOffset={10}
+//     >
+//       <Div px={25}>
+//         <DatePicker
+//           date={formik.values.date}
+//           touched={formik.touched.date}
+//           errors={formik.errors.date}
+//           formik={formik}
+//         />
+//         <Select
+//           label="Product"
+//           field="product"
+//           products={productNames}
+//           errors={formik.errors.product}
+//           touched={formik.touched.product}
+//           formik={formik}
+//         />
+//         <InputField1
+//           label="Number of cows"
+//           keyboardType="number-pad"
+//           value={formik.values.noOfCows}
+//           field="noOfCows"
+//           errors={formik.errors.noOfCows}
+//           touched={formik.touched.noOfCows}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Number of cows"
+//           keyboardType="number-pad"
+//           value={formik.values.noOfCows}
+//           field="noOfCows"
+//           errors={formik.errors.noOfCows}
+//           touched={formik.touched.noOfCows}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Quantity"
+//           keyboardType="number-pad"
+//           value={formik.values.quantity}
+//           field="quantity"
+//           errors={formik.errors.quantity}
+//           touched={formik.touched.quantity}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Meter reading"
+//           keyboardType="number-pad"
+//           value={formik.values.meterReading}
+//           field="meterReading"
+//           errors={formik.errors.meterReading}
+//           touched={formik.touched.meterReading}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Water usage"
+//           keyboardType="number-pad"
+//           value={formik.values.waterUsage}
+//           field="waterUsage"
+//           errors={formik.errors.waterUsage}
+//           touched={formik.touched.waterUsage}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Pump dial"
+//           keyboardType="number-pad"
+//           value={formik.values.pumpDial}
+//           field="pumpDial"
+//           errors={formik.errors.pumpDial}
+//           touched={formik.touched.pumpDial}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Float before delivery"
+//           keyboardType="number-pad"
+//           value={formik.values.floatBeforeDelivery}
+//           field="floatBeforeDelivery"
+//           errors={formik.errors.floatBeforeDelivery}
+//           touched={formik.touched.floatBeforeDelivery}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Target feed rate"
+//           keyboardType="number-pad"
+//           value={formik.values.targetFeedRate}
+//           field="targetFeedRate"
+//           errors={formik.errors.targetFeedRate}
+//           touched={formik.touched.targetFeedRate}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Float after delivery"
+//           keyboardType="number-pad"
+//           value={formik.values.floatAfterDelivery}
+//           field="floatAfterDelivery"
+//           errors={formik.errors.floatAfterDelivery}
+//           touched={formik.touched.floatAfterDelivery}
+//           formik={formik}
+//         />
+//         <InputField
+//           label="Comments"
+//           value={formik.values.comments}
+//           field="comments"
+//           errors={formik.errors.comments}
+//           touched={formik.touched.comments}
+//           formik={formik}
+//           noOfLines={4}
+//         />
+//         <Button
+//           block
+//           py="lg"
+//           my="xl"
+//           bg="green700"
+//           onPress={formik.handleSubmit}
+//         >
+//           Add data
+//         </Button>
+//       </Div>
+//     </KeyboardAvoidingView>
+//   </ScrollView>
+// );

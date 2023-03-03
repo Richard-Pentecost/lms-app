@@ -1,12 +1,16 @@
-import { FontAwesome } from '@expo/vector-icons';
 import { Colours } from '../../constants/colours';
-import { Div, Text } from 'react-native-magnus';
+import { Div, Icon, Text } from 'react-native-magnus';
 
-const FarmCardDetail = ({ children, icon }) => {
+const FarmCardDetail = ({ children, icon, iconLibrary }) => {
   return (
     <Div row pb={5}>
       <Div w="15%">
-        <FontAwesome name={icon} size={16} color={Colours.grey100} />
+        <Icon
+          name={icon}
+          size={16}
+          fontFamily={iconLibrary}
+          color={Colours.grey100}
+        />
       </Div>
       <Div>
         <Text>{children}</Text>

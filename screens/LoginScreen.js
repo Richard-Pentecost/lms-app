@@ -7,6 +7,8 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const loginHandler = (data) => {
+    console.log('***** login handler ****');
+    console.log(data);
     dispatch(loginUser(data));
   };
 

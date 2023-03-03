@@ -16,6 +16,7 @@ import DataScreen from './screens/DataScreen';
 import IconButton from './components/ui/IconButton';
 import AddDataScreen from './screens/AddDataScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -67,7 +68,12 @@ const FarmTabNavigation = ({ route, navigation }) => {
   }, [farm]);
 
   return (
-    <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+    <BottomTab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: Colours.green700,
+      }}
+    >
       <BottomTab.Screen
         name="Information"
         component={FarmScreen}
@@ -113,7 +119,23 @@ const Navigation = () => {
 
 const Root = () => {
   const [isTryingLogin, setIsTryingLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const { loading: dataLoading } = useSelector((state) => state.dataState);
+  const { loading: farmsLoading } = useSelector((state) => state.farmState);
+  const { loading: productLoading } = useSelector(
+    (state) => state.productState
+  );
+  const { loading: authLoading } = useSelector((state) => state.authState);
+
+  useEffect(() => {
+    if (dataLoading || farmsLoading || productLoading || authLoading) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [dataLoading, farmsLoading, productLoading, authLoading]);
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -128,7 +150,12 @@ const Root = () => {
     return <AppLoading />;
   }
 
-  return <Navigation />;
+  return (
+    <>
+      <Spinner visible={loading} />
+      <Navigation />
+    </>
+  );
 };
 
 export default function App() {

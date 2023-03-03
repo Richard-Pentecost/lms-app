@@ -2,26 +2,34 @@ import { useEffect } from 'react';
 import { Div, Text } from 'react-native-magnus';
 import { useDispatch, useSelector } from 'react-redux';
 
-import DataTable from '../components/FarmData/DataTable';
-import DataTable1 from '../components/FarmData/DataTable1';
+import Table from '../components/FarmData/Table';
+import Header from '../components/ui/Header';
 import { fetchData } from '../store/actions/dataActions';
 
 const DataScreen = ({ route }) => {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.dataState);
+  const { data, loading } = useSelector((state) => state.dataState);
 
   useEffect(() => {
     dispatch(fetchData(route.params.farm.uuid));
   }, []);
 
   return (
-    <Div p={10}>
-      <DataTable1 data={data} />
-      {/* {data.length > 0 ? (
-        <DataTable1 data={data} />
-      ) : (
-        <Text>No data found</Text>
-      )} */}
+    <Div py={25}>
+      <Header>Data</Header>
+      {!loading && (
+        <Div px={10} mt={25}>
+          {data?.length > 0 && !loading ? (
+            <Table data={data} />
+          ) : (
+            <Div alignItems="center" pt={50}>
+              <Text fontWeight="bold" fontSize="xl">
+                No data found
+              </Text>
+            </Div>
+          )}
+        </Div>
+      )}
     </Div>
   );
 };

@@ -3,32 +3,51 @@ import { Div } from 'react-native-magnus';
 import { useDispatch, useSelector } from 'react-redux';
 import DataForm from '../components/FarmData/DataForm';
 import Header from '../components/ui/Header';
-import { addData } from '../store/actions/dataActions';
-import { fetchProducts } from '../store/actions/productActions';
+import { addData, fetchData } from '../store/actions/dataActions';
+import { clearErrors, clearSuccessFlag } from '../store/slices/dataSlice';
 import { formatData } from '../utils/formatData';
 
-const AddDataScreen = ({ route }) => {
+const AddDataScreen = ({ route, navigation }) => {
+  const { farm } = route.params;
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.productState);
+  const {
+    data,
+    loading: dataLoading,
+    addDataSuccess,
+  } = useSelector((state) => state.dataState);
+
+  console.log(farm);
+  useEffect(() => {
+    !data && dispatch(fetchData(farm.uuid));
+  }, [data]);
+
+  const addDataHandler = (newData) => {
+    const { uuid } = route.params.farm;
+    const dataObj = formatData(newData, uuid);
+
+    const previousData = data
+      .filter((d) => d.product === newData.product)
+      .sort((a, b) => a.date - b.date);
+
+    dispatch(addData({ data: dataObj, previousData }));
+  };
 
   useEffect(() => {
-    if (!products) {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, products]);
+    addDataSuccess && navigation.navigate('Data');
 
-  const addDataHandler = (data) => {
-    const { uuid } = route.params.farm;
-    const dataObj = formatData(data, uuid);
-    dispatch(addData(dataObj));
-    // dispatch(addData({ farmFk: uuid, ...data}))
-  };
+    return () => {
+      dispatch(clearSuccessFlag());
+      dispatch(clearErrors());
+    };
+  }, [dispatch, navigation, addDataSuccess]);
 
   return (
     <Div py={25}>
-      <Header>Add Data</Header>
-      {products && (
-        <DataForm products={products} handleSubmit={addDataHandler} />
+      {!dataLoading && (
+        <>
+          <Header>Add Data</Header>
+          <DataForm products={farm.products} handleSubmit={addDataHandler} />
+        </>
       )}
     </Div>
   );

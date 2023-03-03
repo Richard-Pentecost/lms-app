@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_URL } from 'react-native-dotenv';
 import { getToken } from '../../utils/token-manager';
+// import { dataActions } from '../slices/dataSlice';
 
 export const fetchData = createAsyncThunk('data/fetchData', async (farmId) => {
   try {
@@ -16,17 +17,34 @@ export const fetchData = createAsyncThunk('data/fetchData', async (farmId) => {
   }
 });
 
-export const addData = createAsyncThunk('data/addData', async (data) => {
-  try {
-    const { farmFk: farmId } = data;
-    const headers = { Authorization: await getToken() };
-    await axios.post(`${API_URL}/farms/${farmId}/data`, { data }, { headers });
-    return;
-  } catch (error) {
-    console.error(error);
-    return 'There was an error adding data';
+export const addData = createAsyncThunk(
+  'data/addData',
+  async ({ data, previousData }) => {
+    const previousDataUuid = previousData.length > 0 && previousData[0].uuid;
+    console.log(previousDataUuid);
+    try {
+      const { farmFk: farmId } = data;
+      const headers = { Authorization: await getToken() };
+      await axios.post(
+        `${API_URL}/farms/${farmId}/data`,
+        { data, previousDataUuid },
+        { headers }
+      );
+      return;
+    } catch (error) {
+      console.error(error);
+      return 'There was an error adding data';
+    }
   }
-});
+);
+
+// export const clearErrors = () => {
+//   return (dispatch) => dispatch(dataActions.clearErrors());
+// };
+
+// export const clearSuccessFlag = () => {
+//   return (dispatch) => dispatch(dataActions.clearSuccessFlag());
+// };
 
 // export const fetchData = (farmId) => {
 //   return async (dispatch) => {

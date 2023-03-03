@@ -7,7 +7,7 @@ import {
   dataTableHeadings,
 } from '../../constants/dataTableConstants';
 
-const DataTable = ({ data }) => {
+const DataTableOld = ({ data }) => {
   const headings = dataTableHeadings;
 
   const tableBody = data.map((rowData) => {
@@ -48,7 +48,7 @@ const DataTable = ({ data }) => {
   );
 };
 
-export default DataTable;
+export default DataTableOld;
 
 const styles = StyleSheet.create({
   constainer: {

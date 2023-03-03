@@ -31,6 +31,7 @@ const LoginForm = ({ loginUser }) => {
         py="lg"
         placeholder="Email address"
         autoCapitalize={false}
+        focusBorderColor="blue400"
         value={formik.values.email}
         onChangeText={formik.handleChange('email')}
         onBlur={formik.handleBlur('email')}
@@ -53,6 +54,7 @@ const LoginForm = ({ loginUser }) => {
         py="lg"
         placeholder="Password"
         secureTextEntry
+        focusBorderColor="blue400"
         value={formik.values.password}
         onChangeText={formik.handleChange('password')}
         onBlur={formik.handleBlur('password')}

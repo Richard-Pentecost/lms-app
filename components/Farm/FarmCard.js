@@ -8,14 +8,7 @@ const FarmCard = ({
   contactNumber,
   onPress,
 }) => (
-  <Div
-    shadow="sm"
-    w="48%"
-    borderColor="green500"
-    borderWidth={1}
-    mb={10}
-    rounded="lg"
-  >
+  <Div shadow="sm" w="48%" mb={10} rounded="lg">
     <Button block h={120} p="none" bg="white" rounded="lg" onPress={onPress}>
       <Div flex={1} p={10}>
         <Div pb={5} borderBottomColor="gray500" borderBottomWidth={1}>
@@ -24,9 +17,15 @@ const FarmCard = ({
           </Text>
         </Div>
         <Div pt={10}>
-          <FarmCardDetail icon={'address-card-o'}>{postcode}</FarmCardDetail>
-          <FarmCardDetail icon={'user'}>{contactName}</FarmCardDetail>
-          <FarmCardDetail icon={'phone-square'}>{contactNumber}</FarmCardDetail>
+          <FarmCardDetail icon="address-card-o" iconLibrary="FontAwesome">
+            {postcode}
+          </FarmCardDetail>
+          <FarmCardDetail icon="user" iconLibrary="Feather">
+            {contactName}
+          </FarmCardDetail>
+          <FarmCardDetail icon="phone-square" iconLibrary="FontAwesome">
+            {contactNumber}
+          </FarmCardDetail>
         </Div>
       </Div>
     </Button>

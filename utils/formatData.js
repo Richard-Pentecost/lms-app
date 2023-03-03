@@ -15,20 +15,18 @@ export const formatData = (data, uuid) => {
     comments,
   } = data;
 
-  console.log(dayjs().endOf('day'));
-  console.log(dayjs(date).endOf('day'));
   return {
     date,
     farmFk: uuid,
-    noOfCows: +noOfCows,
+    noOfCows,
     product,
-    quantity: +quantity,
-    meterReading: +meterReading,
-    waterUsage: +waterUsage,
-    pumpDial: +pumpDial,
-    floatBeforeDelivery: +floatBeforeDelivery,
-    targetFeedRate: +targetFeedRate,
-    floatAfterDelivery: +floatAfterDelivery,
+    quantity,
+    meterReading,
+    waterUsage,
+    pumpDial,
+    floatBeforeDelivery,
+    targetFeedRate,
+    floatAfterDelivery,
     comments,
   };
 };

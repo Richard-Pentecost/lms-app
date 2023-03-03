@@ -5,7 +5,7 @@ const initialState = {
   farms: null,
   allFarms: null,
   loading: false,
-  errorMessgae: '',
+  errorMessage: '',
   addFarmSuccess: false,
 };
 

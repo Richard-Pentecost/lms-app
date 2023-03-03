@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addData, fetchData } from '../actions/dataActions';
 
 const initialState = {
-  data: [],
+  data: null,
   loading: false,
   errorMessage: '',
   addDataSuccess: false,
@@ -11,6 +11,15 @@ const initialState = {
 const dataSlice = createSlice({
   name: 'data',
   initialState,
+  reducers: {
+    clearErrors(state) {
+      state.loading = false;
+      state.errorMessage = '';
+    },
+    clearSuccessFlag(state) {
+      state.addDataSuccess = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -41,6 +50,6 @@ const dataSlice = createSlice({
   },
 });
 
-export const dataActions = dataSlice.actions;
+export const { clearErrors, clearSuccessFlag } = dataSlice.actions;
 
 export default dataSlice.reducer;
