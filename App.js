@@ -17,6 +17,7 @@ import IconButton from './components/ui/IconButton';
 import AddDataScreen from './screens/AddDataScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Spinner from 'react-native-loading-spinner-overlay';
+import EditDataScreen from './screens/EditDataScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -56,6 +57,7 @@ const AuthenticatedStack = () => {
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Farm" component={FarmTabNavigation} />
+      <Stack.Screen name="Edit Data" component={EditDataScreen} />
     </Stack.Navigator>
   );
 };

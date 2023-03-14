@@ -9,9 +9,10 @@ import { fetchData } from '../store/actions/dataActions';
 const DataScreen = ({ route }) => {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.dataState);
+  const { farm } = route.params;
 
   useEffect(() => {
-    dispatch(fetchData(route.params.farm.uuid));
+    dispatch(fetchData(farm.uuid));
   }, []);
 
   return (
@@ -20,7 +21,7 @@ const DataScreen = ({ route }) => {
       {!loading && (
         <Div px={10} mt={25}>
           {data?.length > 0 && !loading ? (
-            <Table data={data} />
+            <Table data={data} farm={farm} />
           ) : (
             <Div alignItems="center" pt={50}>
               <Text fontWeight="bold" fontSize="xl">

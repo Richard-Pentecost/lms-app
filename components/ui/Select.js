@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 import { StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -21,6 +20,7 @@ const Select = ({ label, field, products, errors, touched, formik }) => {
         onSelect={formik.handleChange(field)}
         onBlur={() => formik.handleBlur(field)}
         defaultButtonText={'Select product'}
+        defaultValue={formik.values.product}
         buttonTextAfterSelection={(selectedItem) => selectedItem}
         rowTextForSelection={(item) => item}
         buttonStyle={dropdownBoxStyling()}

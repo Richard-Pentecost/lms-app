@@ -10,23 +10,22 @@ import { Button, Div } from 'react-native-magnus';
 import { dataValidator } from '../../utils/formValidators';
 import DatePicker from '../Farm/DatePicker';
 import InputField from '../Farm/InputField';
-import InputField1 from '../Farm/InputField1';
 import Select from '../ui/Select';
 
-const DataForm = ({ products, handleSubmit }) => {
+const DataForm = ({ products, handleSubmit, data }) => {
   const formik = useFormik({
     initialValues: {
-      date: new Date(),
-      product: '',
-      noOfCows: '',
-      quantity: '',
-      meterReading: '',
-      waterUsage: '',
-      pumpDial: '',
-      floatBeforeDelivery: '',
-      targetFeedRate: '',
-      floatAfterDelivery: '',
-      comments: '',
+      date: data ? new Date(data.date) : new Date(),
+      product: data ? data.product : '',
+      noOfCows: data ? `${data.noOfCows}` : '',
+      quantity: data ? data.quantity : '',
+      meterReading: data ? data.meterReading : '',
+      waterUsage: data ? data.waterUsage : '',
+      pumpDial: data ? data.pumpDial : '',
+      floatBeforeDelivery: data ? data.floatBeforeDelivery : '',
+      targetFeedRate: data ? data.targetFeedRate : '',
+      floatAfterDelivery: data ? data.floatAfterDelivery : '',
+      comments: data ? data.comments : '',
     },
     onSubmit: (data) => {
       handleSubmit(data);
@@ -35,18 +34,6 @@ const DataForm = ({ products, handleSubmit }) => {
   });
 
   const productNames = products.map((product) => product.productName);
-  useEffect(() => {
-    // console.log(formik.values.product);
-    // console.log(formik.touched.noOfCows);
-    // console.log(formik.values.date);
-    // console.log(formik.touched.quantity);
-    // console.log(formik.touched.meterReading);
-    // console.log(formik.touched.waterUsage);
-    // console.log(formik.touched.pumpDial);
-    // console.log(formik.touched.floatBeforeDelivery);
-    // console.log(formik.touched.targetFeedRate);
-    // console.log(formik.touched.floatAfterDelivery);
-  }, [formik.values]);
 
   return (
     <ScrollView style={styles.container}>

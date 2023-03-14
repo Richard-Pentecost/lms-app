@@ -15,7 +15,7 @@ const DataForm = () => {
     setFormValues({ ...formValues, [inputType]: enteredValue });
   };
 
-  const handleDateChange = (event, selectedDate) => {
+  const handleDateChange = (_, selectedDate) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
   };
