@@ -1,5 +1,4 @@
 import { useFormik } from 'formik';
-import { useEffect } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -10,7 +9,7 @@ import { Button, Div } from 'react-native-magnus';
 import { dataValidator } from '../../utils/formValidators';
 import DatePicker from '../Farm/DatePicker';
 import InputField from '../Farm/InputField';
-import Select from '../ui/Select';
+import SelectDropdown from '../ui/SelectDropdown';
 
 const DataForm = ({ products, handleSubmit, data }) => {
   const formik = useFormik({
@@ -48,7 +47,7 @@ const DataForm = ({ products, handleSubmit, data }) => {
             errors={formik.errors.date}
             formik={formik}
           />
-          <Select
+          <SelectDropdown
             label="Product"
             field="product"
             products={productNames}
@@ -144,7 +143,7 @@ const DataForm = ({ products, handleSubmit, data }) => {
             bg="green700"
             onPress={formik.handleSubmit}
           >
-            Add data
+            {data ? 'Update data' : 'Add data'}
           </Button>
         </Div>
       </KeyboardAvoidingView>

@@ -1,20 +1,32 @@
-import { useNavigation } from '@react-navigation/native';
 import dayjs from 'dayjs';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-magnus';
 import { DataTable } from 'react-native-paper';
 import { dataTableHeadings } from '../../constants/dataTableConstants';
 
-const Table = ({ data, farm }) => {
-  const navigation = useNavigation();
-
+const Table = ({ data, openModal }) => {
   const tableBody = data.map((rowData, index) => {
     const objectKeys = Object.keys(rowData).filter(
       (key) => key !== 'uuid' && key !== 'farmFk'
     );
 
     onPressHandler = () => {
-      navigation.navigate('Edit Data', { farm, data: rowData });
+      const filteredData = data
+        .filter((d) => d.product === rowData.product)
+        .sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+
+      let previousData;
+
+      if (filteredData.length > 1) {
+        const index = filteredData.findIndex(
+          (data) => data.uuid === rowData.uuid
+        );
+        previousData = index > 0 && filteredData[index - 1];
+      }
+
+      openModal(rowData, previousData);
     };
 
     return (

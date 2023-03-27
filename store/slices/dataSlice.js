@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addData, fetchData } from '../actions/dataActions';
+import { addData, fetchData, updateData } from '../actions/dataActions';
 
 const initialState = {
   data: null,
@@ -44,6 +44,19 @@ const dataSlice = createSlice({
         state.addDataSuccess = true;
       })
       .addCase(addData.rejected, (state, action) => {
+        state.loading = false;
+        state.errorMessage = action.payload;
+      })
+      .addCase(updateData.pending, (state) => {
+        state.loading = true;
+        state.error = '';
+        state.addDataSuccess = false;
+      })
+      .addCase(updateData.fulfilled, (state) => {
+        state.loading = false;
+        state.addDataSuccess = true;
+      })
+      .addCase(updateData.rejected, (state, action) => {
         state.loading = false;
         state.errorMessage = action.payload;
       });

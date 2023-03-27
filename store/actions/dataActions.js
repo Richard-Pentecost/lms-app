@@ -21,7 +21,10 @@ export const addData = createAsyncThunk(
   'data/addData',
   async ({ data, previousData }) => {
     const previousDataUuid = previousData.length > 0 && previousData[0].uuid;
-    console.log(previousDataUuid);
+
+    // console.log('***** add data ******');
+    // console.log(data);
+    // console.log(previousData.length > 0 && previousData[0].date);
     try {
       const { farmFk: farmId } = data;
       const headers = { Authorization: await getToken() };
@@ -34,6 +37,30 @@ export const addData = createAsyncThunk(
     } catch (error) {
       console.error(error);
       return 'There was an error adding data';
+    }
+  }
+);
+
+export const updateData = createAsyncThunk(
+  'data/updateData',
+  async ({ data, dataId, previousData }) => {
+    const previousDataUuid = previousData?.uuid;
+
+    // console.log('***** update data ******');
+    // console.log(data);
+
+    try {
+      const { farmFk: farmId } = data;
+      const headers = { Authorization: await getToken() };
+      await axios.patch(
+        `${API_URL}/farms/${farmId}/data/${dataId}`,
+        { data, previousDataUuid },
+        { headers }
+      );
+      return;
+    } catch (error) {
+      console.error(error);
+      return 'There was an error updating data';
     }
   }
 );

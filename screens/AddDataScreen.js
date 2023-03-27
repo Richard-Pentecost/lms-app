@@ -16,7 +16,6 @@ const AddDataScreen = ({ route, navigation }) => {
     addDataSuccess,
   } = useSelector((state) => state.dataState);
 
-  console.log(farm);
   useEffect(() => {
     !data && dispatch(fetchData(farm.uuid));
   }, [data]);
@@ -27,7 +26,7 @@ const AddDataScreen = ({ route, navigation }) => {
 
     const previousData = data
       .filter((d) => d.product === newData.product)
-      .sort((a, b) => a.date - b.date);
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     dispatch(addData({ data: dataObj, previousData }));
   };
