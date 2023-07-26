@@ -8,16 +8,14 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 
-const SearchBar = ({ searchFilterFunction }) => {
+const SearchBar = ({ searchValue, setSearchValue }) => {
   const [clicked, setClicked] = useState(false);
-  const [search, setSearch] = useState('');
 
   const cancelSearch = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     Keyboard.dismiss();
-    setSearch('');
     setClicked(false);
-    searchFilterFunction('');
+    clearSearch();
   };
 
   const selectSearchBar = () => {
@@ -26,13 +24,11 @@ const SearchBar = ({ searchFilterFunction }) => {
   };
 
   const onTextChange = (text) => {
-    setSearch(text);
-    searchFilterFunction(text);
+    setSearchValue(text);
   };
 
   const clearSearch = () => {
-    setSearch('');
-    searchFilterFunction('');
+    setSearchValue('');
   };
 
   return (
@@ -46,7 +42,7 @@ const SearchBar = ({ searchFilterFunction }) => {
         borderColor="transparent"
         returnKeyType="search"
         onChangeText={onTextChange}
-        value={search}
+        value={searchValue}
         prefix={
           <Icon
             name="search"
@@ -57,7 +53,7 @@ const SearchBar = ({ searchFilterFunction }) => {
         }
         suffix={
           clicked &&
-          search.length > 0 && (
+          searchValue.length > 0 && (
             <Pressable
               onPress={clearSearch}
               style={({ pressed }) => pressed && styles.pressed}
@@ -74,7 +70,7 @@ const SearchBar = ({ searchFilterFunction }) => {
         onFocus={selectSearchBar}
       />
       {clicked && (
-        <Div style={styles.cancelBtn}>
+        <Div justifyContent="center">
           <Button title="Cancel" onPress={cancelSearch}></Button>
         </Div>
       )}
@@ -85,9 +81,6 @@ const SearchBar = ({ searchFilterFunction }) => {
 export default SearchBar;
 
 const styles = StyleSheet.create({
-  cancelBtn: {
-    justifyContent: 'center',
-  },
   pressed: {
     opacity: 0.25,
   },
