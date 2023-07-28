@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Pressable, Button, StyleSheet } from 'react-native';
-import { Div, Dropdown, Text } from 'react-native-magnus';
+import { Div, Dropdown, Icon, Text } from 'react-native-magnus';
+import { Colours } from '../../constants/colours';
 
 const FilterSortPanel = ({ regions, region, setRegion }) => {
   const dropdownRef = useRef();
@@ -11,9 +12,20 @@ const FilterSortPanel = ({ regions, region, setRegion }) => {
         style={(({ pressed }) => pressed && styles.pressed, styles.filter)}
         onPress={() => !region && dropdownRef.current?.open()}
       >
-        <Text fontWeight="bold" fontSize="xl" my={4}>
-          {region ? `Filtering by ${region} region` : 'Filter'}
-        </Text>
+        <Div row>
+          <Text fontWeight="bold" fontSize="xl" my={4}>
+            {region ? `Filtering by ${region} region` : 'Filter'}
+          </Text>
+          {!region && (
+            <Icon
+              name="caret-down"
+              fontFamily="FontAwesome"
+              size={16}
+              color={Colours.grey900}
+              ml={5}
+            />
+          )}
+        </Div>
       </Pressable>
       {region && (
         <Div justifyContent="center">

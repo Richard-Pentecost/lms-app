@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome } from '@expo/vector-icons';
 import store from './store';
-import { authenticate, logoutUser } from './store/actions/authActions';
 import { Colours } from './constants/colours';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -18,6 +17,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as SplashScreen from 'expo-splash-screen';
 import { View } from 'react-native';
+import { authenticateUser, logoutUser } from './store/slices/authSlice';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -149,7 +149,7 @@ const Root = () => {
 
   useEffect(() => {
     const fetchToken = async () => {
-      dispatch(authenticate());
+      dispatch(authenticateUser());
       setIsTryingLogin(false);
     };
 
